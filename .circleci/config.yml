@@ -28,6 +28,7 @@ jobs:
       - add_ssh_keys:
               
               fingerprints: ["59:62:94:1c:eb:0d:c9:1f:2f:32:a0:83:f9:24:bf:78"] 
+      - run: /usr/local/bin/python -m pip install --upgrade pip
       - run:
           name: Install Ansible
           command: |
