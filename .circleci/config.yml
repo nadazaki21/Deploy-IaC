@@ -5,17 +5,14 @@ commands:
    # Exercise - Rollback
    destroy_environment:
      steps:
-      - run: curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-      - run: unzip awscliv2.zip
-      - run: sudo ./aws/install
-      - run: aws configure set aws_access_key_id "AKIAR7SOF6HDQZRSX7OL"  && aws configure set aws_secret_access_key "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"  && aws configure set region "us-east-1" 
+      
       - run:
-           name: Destroy environment
-           # ${CIRCLE_WORKFLOW_ID} is a Built-in environment variable 
-           # ${CIRCLE_WORKFLOW_ID:0:5} takes the first 5 chars of the variable CIRCLE_CI_WORKFLOW_ID 
-           when: on_fail
-           command: |
-             aws cloudformation delete-stack --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:7}
+          name: Destroy environment
+          # ${CIRCLE_WORKFLOW_ID} is a Built-in environment variable 
+          # ${CIRCLE_WORKFLOW_ID:0:5} takes the first 5 chars of the variable CIRCLE_CI_WORKFLOW_ID 
+          when: on_fail
+          command: |
+            aws cloudformation delete-stack --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:7}
 
   
 jobs:
@@ -68,11 +65,13 @@ jobs:
     docker:
       - image: alpine:latest
     steps:
-      - run: apk add --update curl
+      - run: curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+      - run: unzip awscliv2.zip
+      - run: sudo ./aws/install
+      - run: aws configure set aws_access_key_id "AKIAR7SOF6HDQZRSX7OL"  && aws configure set aws_secret_access_key "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"  && aws configure set region "us-east-1" 
       - run:
           name: smoke test
           command: |
-          
             return 1
             
       - destroy_environment
