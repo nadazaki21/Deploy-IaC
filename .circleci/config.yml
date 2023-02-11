@@ -34,48 +34,46 @@ jobs:
 
 
   # Exercise: Config and Deployment
-  configure_infrastructure: 
-    docker:
-      - image: cimg/base:2023.02
-    steps:
-      - checkout
-      - add_ssh_keys:
+  # configure_infrastructure: 
+  #   docker:
+  #     - image: cimg/base:2023.02
+  #   steps:
+  #     - checkout
+  #     - add_ssh_keys:
               
-          fingerprints: 
+  #         fingerprints: 
             
-            - "6f:19:cc:65:5b:b5:b5:da:69:c8:31:f0:5e:0f:21:13"
+  #           - "6f:19:cc:65:5b:b5:b5:da:69:c8:31:f0:5e:0f:21:13"
       
       
-      - run:
-          name: Install Ansible
-          command: |
-            sudo apt install software-properties-common 
-            sudo add-apt-repository --yes --update ppa:ansible/ansible
-            sudo apt install ansible 
+  #     - run:
+  #         name: Install Ansible
+  #         command: |
+  #           sudo apt install software-properties-common 
+  #           sudo add-apt-repository --yes --update ppa:ansible/ansible
+  #           sudo apt install ansible 
 
-      - run: ansible --version 
+  #     - run: ansible --version 
      
-      - run: 
-          name: Run Playbook and Configure server
-          command: |
-            ansible-playbook -i inventory.txt main.yml 
+  #     - run: 
+  #         name: Run Playbook and Configure server
+  #         command: |
+  #           ansible-playbook -i inventory.txt main.yml 
       
        
   # Exercise: Smoke Testing
   smoke_test:
     docker:
-      - image: circleci/node:13.8.0
+      - image: amazon/aws-cli
     steps:
-      - run: curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-      - run: unzip awscliv2.zip
-      - run: sudo ./aws/install
-      - run: aws configure set aws_access_key_id "AKIAR7SOF6HDQZRSX7OL"  && aws configure set aws_secret_access_key "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"  && aws configure set region "us-east-1" 
-      - run:
-          name: smoke test
-          command: |
-            return 1
+      # - run: curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+      # - run: unzip awscliv2.zip
+      # - run: sudo ./aws/install
+      # - run: aws configure set aws_access_key_id "AKIAR7SOF6HDQZRSX7OL"  && aws configure set aws_secret_access_key "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"  && aws configure set region "us-east-1" 
+      - run: return 1
             
       - destroy_environment
+
       - run: echo ${CIRCLE_WORKFLOW_ID:0:7}     
         
 
@@ -88,7 +86,7 @@ workflows:
   myWorkflow:
     jobs:
       - create_infrastructure 
-      - configure_infrastructure
+      # - configure_infrastructure
           
       - smoke_test:
           requires:
