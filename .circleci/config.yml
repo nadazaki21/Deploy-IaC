@@ -4,24 +4,24 @@ version: 2.1
   
 jobs:
   
-  create_infrastructure: 
-    docker:
-      - image: amazon/aws-cli  #The job code uses amazon/aws-cli docker image that has AWS CLI installed already. 
-      # the AWS cli crdentials that we have set up as enviroment variables in the prohect settin on circleci, are used in this image
-    steps:
-      - checkout
-      - run:
-          name: Create Cloudformation Stack
-          command: |
-            aws cloudformation deploy \
-              --template-file template.yml \
-              --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5} \
-              --region us-east-1
+  # create_infrastructure: 
+  #   docker:
+  #     - image: amazon/aws-cli  #The job code uses amazon/aws-cli docker image that has AWS CLI installed already. 
+  #     # the AWS cli crdentials that we have set up as enviroment variables in the prohect settin on circleci, are used in this image
+  #   steps:
+  #     - checkout
+  #     - run:
+  #         name: Create Cloudformation Stack
+  #         command: |
+  #           aws cloudformation deploy \
+  #             --template-file template.yml \
+  #             --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5} \
+  #             --region us-east-1
 
   # Exercise: Config and Deployment
   configure_infrastructure: 
     docker:
-      - image: 
+      - image: python:3.7-alpine3.11
     steps:
       - checkout
       - add_ssh_keys:
@@ -30,11 +30,11 @@ jobs:
       - run:
           name: Install Ansible
           command: |
-            pip install --user ansible
+            apk add --update ansible
       - run:
           name: Run Playbook and Configure server
           command: |
-            ansible-playbook main.yml -i inventory.txt 
+            ansible-playbook -i inventory.txt main.yml
 
 
 
@@ -43,7 +43,7 @@ workflows:
  
   myWorkflow:
     jobs:
-      - create_infrastructure 
+      # - create_infrastructure 
       - configure_infrastructure:
-          requires:
-            -create_infrastructure
+          # requires:
+          #   - create_infrastructure
