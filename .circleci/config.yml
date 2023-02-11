@@ -35,9 +35,7 @@ jobs:
             sudo apt install software-properties-common 
             sudo add-apt-repository --yes --update ppa:ansible/ansible
             sudo apt install ansible 
-      - run: ifconfig 
-      - run: hostname 
-      - run : whoami
+     
       - run: 
           name: Run Playbook and Configure server
           command: |
