@@ -4,18 +4,19 @@ orbs:
   
 jobs:
   
-   create_infrastructure: 
-      docker:
-        - image: amazon/aws-cli  #The job code uses amazon/aws-cli docker image that has AWS CLI installed already. 
-      steps:
-        - checkout
-        - run:
-            name: Create Cloudformation Stack
-            command: |
-              aws cloudformation deploy \
-                --template-file iac.yml \
-                --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5} \
-                --region us-east-1
+  create_infrastructure: 
+    docker:
+      - image: amazon/aws-cli  #The job code uses amazon/aws-cli docker image that has AWS CLI installed already. 
+      # the AWS cli crdentials that we have set up as enviroment variables in the prohect settin on circleci, are used in this image
+    steps:
+      - checkout
+      - run:
+          name: Create Cloudformation Stack
+          command: |
+            aws cloudformation deploy \
+              --template-file iac.yml \
+              --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5} \
+              --region us-east-1
 
 workflows:
  
