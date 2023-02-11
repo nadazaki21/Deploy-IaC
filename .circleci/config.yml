@@ -18,10 +18,11 @@ jobs:
   #             --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5} \
   #             --region us-east-1
 
+
   # Exercise: Config and Deployment
   configure_infrastructure: 
     docker:
-      - image: python:3.7-alpine3.11
+      - image: python:3.7-alpine3.11  # imagge used when usingg ansible 
     steps:
       - checkout
       - add_ssh_keys:
@@ -31,6 +32,8 @@ jobs:
           name: Install Ansible
           command: |
             apk add --update ansible
+      - run: ifconfig 
+      - run: hostname 
       - run:
           name: Run Playbook and Configure server
           command: |
