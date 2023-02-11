@@ -9,9 +9,9 @@ commands:
       # - run:
       #     name: Destroy environment
       #     # ${CIRCLE_WORKFLOW_ID} is a Built-in environment variable 
-      #     # ${CIRCLE_WORKFLOW_ID:0:5} takes the first 5 chars of the variable CIRCLE_CI_WORKFLOW_ID 
+      #     # ${CIRCLE_WORKFLOW_ID:0:5} takes the first 5 chars of the variable CIRCLE_CI_WORKFLOW_ID # for that deleting the stack wont be effective as the 
           
-      - run:  aws cloudformation delete-stack --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:7}
+      - run:  aws cloudformation delete-stack --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5}
       # - when:
       #     condition: on_fail
       #     steps:
@@ -32,7 +32,7 @@ jobs:
           command: |
             aws cloudformation deploy \
               --template-file template.yml \
-              --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5} \
+              --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5}\
               --region us-east-1
 
 
@@ -84,7 +84,7 @@ jobs:
       #       - on_fail
          
 
-      - run: echo ${CIRCLE_WORKFLOW_ID:0:7}     
+      - run: echo ${CIRCLE_WORKFLOW_ID:0:5}     
         
 
 
