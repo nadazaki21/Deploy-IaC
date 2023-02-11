@@ -34,7 +34,8 @@ jobs:
             apk add --update ansible
       - run: ifconfig 
       - run: hostname 
-      - run: whoami
+      - run : whoami
+      - run: 
           name: Run Playbook and Configure server
           command: |
             ansible-playbook -i inventory.txt main.yml 
