@@ -1,0 +1,10 @@
+- name: "deploy a stack in a pipeline and confihure it with ansible " 
+
+  hosts: hosts
+  user: ubuntu
+  become: true
+  become_method: sudo
+  become_user: root
+  roles:
+    - deploy
+    
