@@ -28,8 +28,8 @@ jobs:
       - add_ssh_keys:
               
           fingerprints: 
-            - ["59:62:94:1c:eb:0d:c9:1f:2f:32:a0:83:f9:24:bf:78"] 
-            - ["6f:19:cc:65:5b:b5:b5:da:69:c8:31:f0:5e:0f:21:13"]
+            - "59:62:94:1c:eb:0d:c9:1f:2f:32:a0:83:f9:24:bf:78"
+            - "6f:19:cc:65:5b:b5:b5:da:69:c8:31:f0:5e:0f:21:13"
       
       
       - run:
@@ -42,7 +42,7 @@ jobs:
       - run: 
           name: Run Playbook and Configure server
           command: |
-            ansible-playbook -i inventory.txt main.yml --private-key root.pem
+            ansible-playbook -i inventory.txt main.yml 
       
 
 
