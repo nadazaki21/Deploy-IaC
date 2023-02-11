@@ -29,6 +29,7 @@ jobs:
               
               fingerprints: ["59:62:94:1c:eb:0d:c9:1f:2f:32:a0:83:f9:24:bf:78"] 
       - run: /usr/local/bin/python -m pip install --upgrade pip
+      - run: export ANSIBLE_HOST_KEY_CHECKING=False
       - run:
           name: Install Ansible
           command: |
@@ -40,6 +41,7 @@ jobs:
           name: Run Playbook and Configure server
           command: |
             ansible-playbook -i inventory.txt main.yml --private-key root.pem
+      
 
 
 
