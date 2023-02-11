@@ -32,7 +32,7 @@ jobs:
       - run:
           name: Install Ansible
           command: |
-            pip install --user ansible
+            apk add --update ansible
       - run: ifconfig 
       - run: hostname 
       - run : whoami
