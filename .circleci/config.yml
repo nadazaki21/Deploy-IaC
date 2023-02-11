@@ -3,8 +3,8 @@ version: 2.1
 
 commands:
    # Exercise - Rollback
-   destroy_environment:
-     steps:
+  destroy_environment:
+    steps:
       
       - run:
           name: Destroy environment
@@ -70,7 +70,8 @@ jobs:
       # - run: unzip awscliv2.zip
       # - run: sudo ./aws/install
       # - run: aws configure set aws_access_key_id "AKIAR7SOF6HDQZRSX7OL"  && aws configure set aws_secret_access_key "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"  && aws configure set region "us-east-1" 
-      - run: return 1
+      - run: |
+          return 1
             
       - destroy_environment
         when: on_fail
