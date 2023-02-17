@@ -156,7 +156,7 @@ workflows:
  
   myWorkflow:
     jobs:
-      # - create_infrastructure 
+      - create_infrastructure 
       # - configure_infrastructure
           
       # - smoke_test:
