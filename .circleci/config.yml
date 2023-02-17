@@ -23,6 +23,11 @@ jobs:
       # the AWS cli crdentials that we have set up as enviroment variables in the prohect settin on circleci, are used in this image
     steps:
       - checkout
+      - run: pwd 
+      - run: ls -la 
+      - run: cd ~ 
+      - run: -la -la 
+      - run: la -la | grep "temp"
       - run:
           name: Create Cloudformation Stack
           command: |
