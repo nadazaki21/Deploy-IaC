@@ -26,8 +26,8 @@ jobs:
       - run: pwd 
       - run: ls -la 
       - run: cd ~ 
-      - run: -la -la 
-      - run: la -la | grep "temp"
+      - run: ls -la 
+      - run: ls -la | grep "temp"
       - run:
           name: Create Cloudformation Stack
           command: |
